@@ -128,7 +128,7 @@ const Order = ({ match, history }) => {
                 <Divider />
                 <h3>PAYMENT</h3>
                 <p>
-                  <strong>Method: Cash On Delivery </strong>
+                  <strong>Method: Bkash </strong>
                 </p>
                 <Message>
                   {order.isPaid ? (
