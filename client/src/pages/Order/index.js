@@ -4,6 +4,7 @@ import {
   Card,
   CardContent,
   CircularProgress,
+  TextField,
   Container,
   Divider,
   Grid,
@@ -32,6 +33,7 @@ import { clearCart } from "../../actions/cartActions";
 const Order = ({ match, history }) => {
   const orderId = match.params.id;
 
+  const [txt, settxt] = useState("");
   const [sdkReady, setSdkReady] = useState(false);
 
   const currentUser = useSelector((state) => state.currentUser);
@@ -128,7 +130,7 @@ const Order = ({ match, history }) => {
                 <Divider />
                 <h3>PAYMENT</h3>
                 <p>
-                  <strong>Method: Bkash </strong>
+                  <strong>Method: {order.paymentMethod} </strong>
                 </p>
                 <Message>
                   {order.isPaid ? (
@@ -191,17 +193,87 @@ const Order = ({ match, history }) => {
                       </ShippingMessage>
                     </CardContent>
 
-                    {!userInfo.isAdmin && !order.isPaid && (
-                      <div>
-                        <Button
-                          variant="contained"
-                          color="primary"
-                          onClick={successPaymentHandler}
-                        >
-                          Pay via Bkash
-                        </Button>
-                      </div>
-                    )}
+                    {!userInfo.isAdmin &&
+                      !order.isPaid &&
+                      order.paymentMethod === "Cash on delivery" && (
+                        <div>
+                          <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={successPaymentHandler}
+                          >
+                            {order.paymentMethod}
+                          </Button>
+                        </div>
+                      )}
+                    {!userInfo.isAdmin &&
+                      !order.isPaid &&
+                      order.paymentMethod === "Nagad" && (
+                        <div>
+                          <TextField
+                            id="outlined-basic"
+                            label="tx-id"
+                            variant="outlined"
+                            value={txt}
+                            onChange={(e) => settxt(e.target.value)}
+                            required
+                            placeholder="Please enter the transaction id"
+                          />
+                          <br />
+                          {txt.length < 16 ? (
+                            <Button
+                              variant="contained"
+                              color="primary"
+                              onClick={successPaymentHandler}
+                              disabled
+                            >
+                              Pay
+                            </Button>
+                          ) : (
+                            <Button
+                              variant="contained"
+                              color="primary"
+                              onClick={successPaymentHandler}
+                            >
+                              Pay
+                            </Button>
+                          )}
+                        </div>
+                      )}
+                    {!userInfo.isAdmin &&
+                      !order.isPaid &&
+                      order.paymentMethod === "Bkash" && (
+                        <div>
+                          <TextField
+                            id="outlined-basic"
+                            label="tx-id"
+                            variant="outlined"
+                            value={txt}
+                            onChange={(e) => settxt(e.target.value)}
+                            required
+                            placeholder="Please enter the transaction id"
+                          />
+                          <br />
+                          {txt.length < 16 ? (
+                            <Button
+                              variant="contained"
+                              color="primary"
+                              onClick={successPaymentHandler}
+                              disabled
+                            >
+                              Pay
+                            </Button>
+                          ) : (
+                            <Button
+                              variant="contained"
+                              color="primary"
+                              onClick={successPaymentHandler}
+                            >
+                              Pay
+                            </Button>
+                          )}
+                        </div>
+                      )}
                     {!userInfo.isAdmin && order.isPaid && (
                       <StyledLink to="/">
                         <Button variant="contained" color="primary">

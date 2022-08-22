@@ -22,7 +22,7 @@ const PaymentPage = ({ history }) => {
     history.push("/shipping");
   }
 
-  const [paymentMethod, setPaymentMethod] = useState("Bkash");
+  const [paymentMethod, setPaymentMethod] = useState("");
 
   const dispatch = useDispatch();
 
@@ -31,6 +31,7 @@ const PaymentPage = ({ history }) => {
     dispatch(savePaymentMethod(paymentMethod));
     history.push("/placeorder");
   };
+  console.log(paymentMethod);
 
   return (
     <div className="shipping-page">
@@ -49,6 +50,16 @@ const PaymentPage = ({ history }) => {
                   value="Bkash"
                   control={<Radio />}
                   label="Bkash"
+                />
+                <FormControlLabel
+                  value="Nagad"
+                  control={<Radio />}
+                  label="Nagad"
+                />
+                <FormControlLabel
+                  value="Cash on delivery"
+                  control={<Radio />}
+                  label="Cash on delivery"
                 />
               </RadioGroup>
             </FormControl>
