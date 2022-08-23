@@ -196,15 +196,20 @@ const Order = ({ match, history }) => {
                     {!userInfo.isAdmin &&
                       !order.isPaid &&
                       order.paymentMethod === "Cash on delivery" && (
-                        <div>
-                          <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={successPaymentHandler}
-                          >
-                            {order.paymentMethod}
+                        // <div>
+                        //   <Button
+                        //     variant="contained"
+                        //     color="primary"
+                        //     onClick={successPaymentHandler}
+                        //   >
+                        //     {order.paymentMethod}
+                        //   </Button>
+                        // </div>
+                        <StyledLink to="/">
+                          <Button variant="contained" color="primary">
+                            Continue Shopping
                           </Button>
-                        </div>
+                        </StyledLink>
                       )}
                     {!userInfo.isAdmin &&
                       !order.isPaid &&
@@ -281,6 +286,31 @@ const Order = ({ match, history }) => {
                         </Button>
                       </StyledLink>
                     )}
+                    {userInfo &&
+                      userInfo.isAdmin &&
+                      !order.isPaid &&
+                      !order.isDelivered &&
+                      order.paymentMethod === "Cash on delivery" && (
+                        <>
+                          <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={successPaymentHandler}
+                          >
+                            Paid
+                          </Button>
+                          <br />
+                          <br />
+
+                          <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={deliverHandler}
+                          >
+                            Mark As Delivered
+                          </Button>
+                        </>
+                      )}
                     {userInfo &&
                       userInfo.isAdmin &&
                       order.isPaid &&

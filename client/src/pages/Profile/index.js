@@ -148,7 +148,7 @@ const ProfilePage = ({ location, history }) => {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {orders.map((order) => (
+                    {orders.reverse().map((order) => (
                       <StyledTableRow
                         key={order._id}
                         onClick={() => {

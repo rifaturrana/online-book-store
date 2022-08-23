@@ -70,7 +70,7 @@ const OrderList = ({ history }) => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {orders.map((order) => (
+                  {orders.reverse().map((order) => (
                     <StyledTableRow
                       key={order._id}
                       onClick={() => {
